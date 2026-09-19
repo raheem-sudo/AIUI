@@ -1,6 +1,25 @@
-# AIUI
+# Quip / AIUI
 
-AIUI is a web UI for interacting with AI applications built with the Rust ecosystem. The frontend will use **Leptos 0.8**, while a Rust API will expose the AI capabilities provided by the **Rig framework (`rig.rs`)**.
+AIUI is a calm, chat-first workspace for interacting with AI applications built with the Rust ecosystem. It includes a **Leptos 0.8** client with a shadcn-inspired, Tailwind-like visual language and a Rust API that owns provider access through **Rig (`rig.rs`)**.
+
+## Quick start
+
+1. Install the Rust toolchain and the `wasm32-unknown-unknown` target.
+2. Install [Trunk](https://trunkrs.dev/) for the Leptos client.
+3. Copy `.env.example` to `.env` and set `OPENAI_API_KEY` in your shell.
+4. In one terminal, start the API:
+
+   ```bash
+   OPENAI_API_KEY="..." cargo run -p aiui-api
+   ```
+
+5. In another terminal, serve the client:
+
+   ```bash
+   trunk serve --cwd crates/web --port 8080
+   ```
+
+The API accepts a new conversation at `POST /api/conversations` and returns server-sent events from `POST /api/conversations/{id}/messages`. Keys never enter the browser bundle.
 
 The goal is to provide a clean, responsive interface where users can send prompts, receive streamed responses, and later manage conversations, agents, and model settings without coupling the browser directly to an AI provider.
 
@@ -39,14 +58,14 @@ The browser should communicate only with the application API. The API should kee
 
 ### 1. Create the Rust workspace
 
-Use a Cargo workspace with separate crates for the frontend and backend:
+The repository now uses a Cargo workspace with separate crates for the frontend and backend:
 
 ```text
 aiui/
 ├── Cargo.toml
 ├── crates/
-│   ├── web/       # Leptos 0.8 application
-│   ├── api/       # HTTP routes and application services
+│   ├── web/       # Leptos 0.8 application and CSS design system
+│   ├── api/       # Axum routes and Rig agent integration
 │   └── shared/    # Request/response types shared by web and API
 └── README.md
 ```
