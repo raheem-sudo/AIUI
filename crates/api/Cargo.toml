@@ -1,0 +1,24 @@
+[package]
+name = "aiui-api"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "aiui-api"
+path = "src/main.rs"
+
+[dependencies]
+aiui-shared = { path = "../shared" }
+anyhow.workspace = true
+axum = { version = "0.8", features = ["macros"] }
+futures.workspace = true
+rig = { package = "rig-core", version = "0.27", features = ["derive"] }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+uuid.workspace = true

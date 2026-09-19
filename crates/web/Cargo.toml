@@ -1,0 +1,18 @@
+[package]
+name = "aiui-web"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+aiui-shared = { path = "../shared" }
+gloo-net = { version = "0.6", features = ["eventsource"] }
+leptos = { version = "0.8", features = ["csr"] }
+serde_json.workspace = true
+uuid.workspace = true
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = { version = "0.3", features = ["KeyboardEvent", "HtmlTextAreaElement"] }
